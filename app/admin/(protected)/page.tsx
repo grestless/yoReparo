@@ -315,7 +315,7 @@ export default function AdminDashboard() {
                                 {/* Quick Actions */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                                     <button
-                                        onClick={() => openWhatsApp(`Hola ${selectedRequest.client_name}, te confirmamos tu visita para el ${new Date(selectedRequest.scheduled_date).toLocaleDateString()} por la ${selectedRequest.time_slot}.`, selectedRequest.phone)}
+                                        onClick={() => openWhatsApp(`Hola ${selectedRequest.client_name}, te confirmamos tu visita para el ${selectedRequest.scheduled_date ? new Date(selectedRequest.scheduled_date).toLocaleDateString() : ''} por la ${selectedRequest.time_slot}.`, selectedRequest.phone)}
                                         disabled={!selectedRequest.scheduled_date}
                                         className="flex items-center justify-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-lg font-bold hover:bg-green-100 transition-colors disabled:opacity-50"
                                     >
