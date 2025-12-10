@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { z } from "zod";
-import { Lock, Mail, Loader2 } from "lucide-react";
+import { Lock, Mail, Loader2, ArrowLeft } from "lucide-react";
 
 const loginSchema = z.object({
     username: z.string().min(3, "El usuario debe tener al menos 3 caracteres"),
@@ -103,6 +104,17 @@ export function LoginForm() {
                     )}
                 </button>
             </form>
+
+            <div className="absolute top-6 left-6">
+                <Link
+                    href="/"
+                    className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-medium"
+                >
+                    <ArrowLeft className="w-5 h-5" />
+                    Volver al inicio
+                </Link>
+            </div>
+
         </div>
     );
 }

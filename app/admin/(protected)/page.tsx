@@ -18,6 +18,7 @@ export default function AdminDashboard() {
     const [selectedRequest, setSelectedRequest] = useState<ServiceRequest | null>(null);
     const [techs, setTechs] = useState<Technician[]>([]);
     const [selectedTechId, setSelectedTechId] = useState<string>("");
+    const [activeTab, setActiveTab] = useState<'pendientes' | 'en_proceso' | 'finalizados'>('pendientes');
 
     // Month Filter State
     const [selectedMonth, setSelectedMonth] = useState(() => {
@@ -132,7 +133,7 @@ export default function AdminDashboard() {
             </header>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 {loading ? (
                     Array(4).fill(0).map((_, i) => (
                         <Skeleton key={i} className="h-32 rounded-2xl" />
@@ -142,7 +143,6 @@ export default function AdminDashboard() {
                         { label: "Pendientes", value: filteredRequests.filter(r => r.status === "pendiente").length, color: "text-yellow-600", bg: "bg-yellow-50" },
                         { label: "En Proceso", value: filteredRequests.filter(r => r.status === "en_proceso" || r.status === "asignado").length, color: "text-blue-600", bg: "bg-blue-50" },
                         { label: "Finalizados", value: filteredRequests.filter(r => r.status === "finalizado").length, color: "text-green-600", bg: "bg-green-50" },
-                        { label: "Urgencias", value: filteredRequests.filter(r => r.urgency === "urgente").length, color: "text-red-600", bg: "bg-red-50" },
                     ].map((stat, i) => (
                         <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                             <p className="text-slate-500 text-sm font-medium mb-1">{stat.label}</p>
@@ -152,65 +152,89 @@ export default function AdminDashboard() {
                 )}
             </div>
 
-            {/* Kanban Board */}
+            {/* Tabs & List */}
+            <div className="mb-6 flex gap-2 border-b border-slate-200">
+                <button
+                    onClick={() => setActiveTab('pendientes')}
+                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'pendientes' ? 'text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                >
+                    Pendientes
+                    {activeTab === 'pendientes' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
+                </button>
+                <button
+                    onClick={() => setActiveTab('en_proceso')}
+                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'en_proceso' ? 'text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                >
+                    En Proceso
+                    {activeTab === 'en_proceso' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
+                </button>
+                <button
+                    onClick={() => setActiveTab('finalizados')}
+                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'finalizados' ? 'text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                >
+                    Finalizados
+                    {activeTab === 'finalizados' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
+                </button>
+            </div>
+
             {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {Array(3).fill(0).map((_, i) => (
-                        <div key={i} className="space-y-4">
-                            <Skeleton className="h-8 w-32" />
-                            <Skeleton className="h-40 rounded-xl" />
-                            <Skeleton className="h-40 rounded-xl" />
-                        </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {Array(6).fill(0).map((_, i) => (
+                        <Skeleton key={i} className="h-40 rounded-xl" />
                     ))}
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Column: Pendientes */}
-                    <div className="space-y-4">
-                        <h3 className="font-bold text-slate-700 flex items-center gap-2">
-                            <Clock className="w-4 h-4" /> Pendientes
-                        </h3>
-                        {filteredRequests.filter(r => r.status === "pendiente").map(req => (
-                            <RequestCard
-                                key={req.id}
-                                req={req}
-                                onClick={() => setSelectedRequest(req)}
-                            />
-                        ))}
-                        {filteredRequests.filter(r => r.status === "pendiente").length === 0 && (
-                            <div className="text-center py-8 text-slate-400 text-sm bg-slate-50 rounded-xl border border-dashed border-slate-200">
-                                No hay pendientes
-                            </div>
-                        )}
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {activeTab === 'pendientes' && (
+                        <>
+                            {filteredRequests.filter(r => r.status === "pendiente").map(req => (
+                                <RequestCard
+                                    key={req.id}
+                                    req={req}
+                                    onClick={() => setSelectedRequest(req)}
+                                />
+                            ))}
+                            {filteredRequests.filter(r => r.status === "pendiente").length === 0 && (
+                                <div className="col-span-full text-center py-12 text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                                    No hay solicitudes pendientes
+                                </div>
+                            )}
+                        </>
+                    )}
 
-                    {/* Column: En Proceso */}
-                    <div className="space-y-4">
-                        <h3 className="font-bold text-slate-700 flex items-center gap-2">
-                            <User className="w-4 h-4" /> En Proceso
-                        </h3>
-                        {filteredRequests.filter(r => r.status === "asignado" || r.status === "en_proceso").map(req => (
-                            <RequestCard
-                                key={req.id}
-                                req={req}
-                                onClick={() => setSelectedRequest(req)}
-                            />
-                        ))}
-                    </div>
+                    {activeTab === 'en_proceso' && (
+                        <>
+                            {filteredRequests.filter(r => r.status === "asignado" || r.status === "en_proceso").map(req => (
+                                <RequestCard
+                                    key={req.id}
+                                    req={req}
+                                    onClick={() => setSelectedRequest(req)}
+                                />
+                            ))}
+                            {filteredRequests.filter(r => r.status === "asignado" || r.status === "en_proceso").length === 0 && (
+                                <div className="col-span-full text-center py-12 text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                                    No hay solicitudes en proceso
+                                </div>
+                            )}
+                        </>
+                    )}
 
-                    {/* Column: Finalizados */}
-                    <div className="space-y-4">
-                        <h3 className="font-bold text-slate-700 flex items-center gap-2">
-                            <CheckCircle className="w-4 h-4" /> Finalizados
-                        </h3>
-                        {filteredRequests.filter(r => r.status === "finalizado").map(req => (
-                            <RequestCard
-                                key={req.id}
-                                req={req}
-                                onClick={() => setSelectedRequest(req)}
-                            />
-                        ))}
-                    </div>
+                    {activeTab === 'finalizados' && (
+                        <>
+                            {filteredRequests.filter(r => r.status === "finalizado").map(req => (
+                                <RequestCard
+                                    key={req.id}
+                                    req={req}
+                                    onClick={() => setSelectedRequest(req)}
+                                />
+                            ))}
+                            {filteredRequests.filter(r => r.status === "finalizado").length === 0 && (
+                                <div className="col-span-full text-center py-12 text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                                    No hay solicitudes finalizadas
+                                </div>
+                            )}
+                        </>
+                    )}
                 </div>
             )}
 
@@ -228,10 +252,10 @@ export default function AdminDashboard() {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden"
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden"
                             onClick={e => e.stopPropagation()}
                         >
-                            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 shrink-0">
                                 <div>
                                     <h2 className="text-xl font-bold text-slate-900">{selectedRequest.client_name}</h2>
                                     <p className="text-sm text-slate-500">ID: #{selectedRequest.id}</p>
@@ -241,7 +265,7 @@ export default function AdminDashboard() {
                                 </button>
                             </div>
 
-                            <div className="p-6 space-y-6">
+                            <div className="p-6 space-y-6 overflow-y-auto">
                                 {/* Status & Urgency */}
                                 <div className="flex gap-4">
                                     <div className={`px-3 py-1 rounded-full text-sm font-bold capitalize ${selectedRequest.status === 'pendiente' ? 'bg-yellow-100 text-yellow-700' :
