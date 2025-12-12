@@ -100,11 +100,11 @@ Desarrollé una aplicación web completa para la gestión operativa de negocios 
 #### Perfil Comercial (Solución de Negocio)
 **YoReparo: Tu Centro de Operaciones Digital**
 
-Una solución "llave en mano" diseñada para modernizar tu negocio de servicio técnico. Olvídate de las llamadas constantes y los papelitos perdidos; YoReparo profesionaliza tu taller desde el primer día.
+Una solución "llave en mano" diseñada para modernizar tu negocio de servicio técnico. Olvídate de las llamadas constantes, los papelitos perdidos y el desorden; profesionaliza tu taller desde el primer día.
 
 **Beneficios Clave:**
 *   **Recepción 24/7:** Tus clientes pueden solicitar reparaciones desde su celular en cualquier momento, con un formulario profesional que captura todos los datos necesarios.
-*   **Menos Llamadas, Más Trabajo:** Incluye un "Portal de Estado" donde el cliente ingresa su número de orden y ve si su equipo está listo. ¡Adiós a las llamadas de "¿ya está listo?"!
+*   **Menos Llamadas, Más Trabajo:** Incluye un "Portal de Estado" donde el cliente ingresa su número de orden y ve si su equipo está listo. 
 *   **Notificaciones Automáticas:** El sistema te avisa por WhatsApp apenas entra un trabajo nuevo.
 *   **Control Total:** Un panel privado donde ves todas las órdenes, asignas técnicos y gestionas tu negocio de forma ordenada y segura.
 *   **Imagen Premium:** Diferénciate de la competencia con una plataforma web rápida, moderna y con tu propia marca.
