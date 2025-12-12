@@ -146,6 +146,13 @@ export default function RequestPage() {
             setSuccessData({ id: result.id });
             toast.success("¡Solicitud enviada con éxito!");
 
+            // Send WhatsApp Notification (Fire and forget)
+            fetch("/api/notify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData),
+            }).catch(err => console.error("Failed to send notification:", err));
+
             // Clear persistence and services
             localStorage.removeItem("request_form_backup");
             clearServices();

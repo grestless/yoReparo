@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export function Hero() {
     return (
-        <section className="relative py-20 md:py-32 overflow-hidden">
+        <section className="relative py-12 md:py-32 overflow-hidden">
             <div className="container mx-auto px-4 text-center relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -22,7 +22,7 @@ export function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
+                    className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
                 >
                     Tu hogar y empresa <br />
                     <span className="text-primary">en manos expertas.</span>
@@ -45,7 +45,7 @@ export function Hero() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <Link
-                        href="#servicios"
+                        href="/servicios"
                         className="w-full sm:w-auto bg-primary hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-500/25"
                     >
                         Solicitar Servicio
@@ -55,8 +55,6 @@ export function Hero() {
                         href="#garantias"
                         className="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all"
                     >
-                        <ShieldCheck className="w-5 h-5 text-primary" />
-                        Ver Garantías
                     </Link>
                 </motion.div>
             </div>

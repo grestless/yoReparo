@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    Search, Clock, AlertTriangle, User, MapPin, CheckCircle, Calendar, X, Phone, ChevronDown, MessageCircle
+    Search, Clock, AlertTriangle, User, MapPin, CheckCircle, Calendar, X, Phone, ChevronDown, MessageCircle, Trash2
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { openWhatsApp } from "@/utils/whatsapp";
@@ -95,6 +95,41 @@ export default function AdminDashboard() {
         } else {
             toast.success("Estado actualizado correctamente");
         }
+    };
+
+    const deleteRequest = async (id: number, e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent opening the modal
+
+        toast("¿Eliminar solicitud?", {
+            description: "Esta acción no se puede deshacer.",
+            action: {
+                label: "Eliminar",
+                onClick: async () => {
+                    const previousRequests = [...requests];
+                    setRequests(prev => prev.filter(r => r.id !== id));
+
+                    const { error } = await supabase
+                        .from('requests')
+                        .delete()
+                        .eq('id', id);
+
+                    if (error) {
+                        console.error("Error deleting request:", error);
+                        toast.error("Error al eliminar la solicitud");
+                        setRequests(previousRequests); // Revert
+                    } else {
+                        toast.success("Solicitud eliminada");
+                        if (selectedRequest?.id === id) {
+                            setSelectedRequest(null);
+                        }
+                    }
+                }
+            },
+            cancel: {
+                label: "Cancelar",
+                onClick: () => { },
+            },
+        });
     };
 
     // Filter requests based on selected month
@@ -192,6 +227,7 @@ export default function AdminDashboard() {
                                     key={req.id}
                                     req={req}
                                     onClick={() => setSelectedRequest(req)}
+                                    onDelete={(e) => deleteRequest(req.id, e)}
                                 />
                             ))}
                             {filteredRequests.filter(r => r.status === "pendiente").length === 0 && (
@@ -416,7 +452,7 @@ export default function AdminDashboard() {
     );
 }
 
-function RequestCard({ req, onClick }: { req: any, onClick: () => void }) {
+function RequestCard({ req, onClick, onDelete }: { req: any, onClick: () => void, onDelete?: (e: React.MouseEvent) => void }) {
     return (
         <motion.div
             layout
@@ -431,6 +467,15 @@ function RequestCard({ req, onClick }: { req: any, onClick: () => void }) {
                     <span className="text-xs bg-red-100 text-red-600 font-bold px-2 py-1 rounded-full flex items-center gap-1">
                         <AlertTriangle className="w-3 h-3" />
                     </span>
+                )}
+                {onDelete && (
+                    <button
+                        onClick={onDelete}
+                        className="p-1 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors md:opacity-0 md:group-hover:opacity-100"
+                        title="Eliminar solicitud"
+                    >
+                        <Trash2 className="w-4 h-4" />
+                    </button>
                 )}
             </div>
 

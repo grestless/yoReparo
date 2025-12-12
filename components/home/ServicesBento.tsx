@@ -43,7 +43,7 @@ export function ServicesBento() {
                                     viewport={{ once: true }}
                                     onClick={() => toggleService(service)}
                                     className={`
-                                    group relative overflow-hidden rounded-3xl p-8 cursor-pointer transition-all duration-300
+                                    group relative overflow-hidden rounded-3xl p-6 md:p-8 cursor-pointer transition-all duration-300
                                     border hover:shadow-lg
                                     ${selected
                                             ? 'bg-white border-blue-500 ring-1 ring-blue-500 shadow-md'

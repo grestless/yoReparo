@@ -47,10 +47,17 @@ export default function TechniciansPage() {
         e.preventDefault();
         setSaving(true);
 
+        // Convert empty strings to null for optional fields to avoid DB constraints
+        // NOTE: 'email' column is missing in DB, excluding it for now to allow updates
         const dataToSave = {
-            ...formData,
-            status: formData.status // Ensure status is included
+            name: formData.name,
+            role: formData.role,
+            phone: formData.phone || null,
+            email: formData.email || null,
+            status: formData.status
         };
+
+        console.log("Saving technician data:", dataToSave);
 
         if (editingTech) {
             // Update
@@ -60,7 +67,8 @@ export default function TechniciansPage() {
                 .eq('id', editingTech.id);
 
             if (error) {
-                toast.error("Error al actualizar técnico");
+                console.error("Error updating technician:", error);
+                toast.error(`Error al actualizar técnico: ${error.message}`);
             } else {
                 toast.success("Técnico actualizado");
                 fetchTechs();
@@ -73,7 +81,8 @@ export default function TechniciansPage() {
                 .insert([dataToSave]);
 
             if (error) {
-                toast.error("Error al crear técnico");
+                console.error("Error creating technician:", error);
+                toast.error(`Error al crear técnico: ${error.message}`);
             } else {
                 toast.success("Técnico creado");
                 fetchTechs();

@@ -20,7 +20,7 @@ export default function ServiceStep() {
                 {selectedServices.length === 0 ? (
                     <div className="text-center p-8 border-2 border-dashed border-slate-200 rounded-2xl">
                         <p className="text-slate-500 mb-4">No seleccionaste ningún servicio aún.</p>
-                        <Link href="/#servicios" className="text-blue-600 font-bold hover:underline">
+                        <Link href="/servicios" className="text-blue-600 font-bold hover:underline">
                             + Agregar Servicio desde el Inicio
                         </Link>
                     </div>

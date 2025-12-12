@@ -42,7 +42,7 @@ export function Testimonials() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-slate-50 p-8 rounded-3xl flex flex-col items-center text-center"
+                            className="bg-slate-50 p-6 md:p-8 rounded-3xl flex flex-col items-center text-center"
                         >
                             <div className="flex gap-1 mb-6">
                                 {[...Array(testimonial.stars)].map((_, i) => (

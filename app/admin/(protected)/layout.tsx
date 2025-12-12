@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { AdminGuard } from "@/components/admin/AdminGuard";
+import { AdminNotificationListener } from "@/components/admin/AdminNotificationListener";
 
 export const metadata: Metadata = {
     title: "Admin Panel - MultiTech Pro",
@@ -14,6 +15,7 @@ export default function AdminLayout({
 }>) {
     return (
         <AdminGuard>
+            <AdminNotificationListener />
             <div className="min-h-screen flex bg-slate-100">
                 <AdminSidebar />
 

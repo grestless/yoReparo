@@ -46,7 +46,7 @@ export function HowItWorks() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-white p-8 rounded-3xl border border-slate-100 relative flex flex-col items-center text-center"
+                            className="bg-white p-6 md:p-8 rounded-3xl border border-slate-100 relative flex flex-col items-center text-center"
                         >
                             <div className="text-5xl font-bold text-slate-100 absolute top-4 right-4 select-none">
                                 {step.number}
