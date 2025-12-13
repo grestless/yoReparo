@@ -6,11 +6,11 @@ export async function POST(request: Request) {
         const { client_name, issue_type, urgency, phone, location_type } = body;
 
         const apiKey = process.env.CALLMEBOT_API_KEY;
-        const adminPhone = "5493816694147"; // Admin's phone number
+        const adminPhone = process.env.CALLMEBOT_PHONE_NUMBER; // Read from env
 
-        if (!apiKey) {
-            console.warn("CALLMEBOT_API_KEY is not set. WhatsApp notification skipped.");
-            return NextResponse.json({ message: "API Key missing" }, { status: 200 });
+        if (!apiKey || !adminPhone) {
+            console.warn("CALLMEBOT_API_KEY or CALLMEBOT_PHONE_NUMBER is not set. WhatsApp notification skipped.");
+            return NextResponse.json({ message: "Configuration missing" }, { status: 200 });
         }
 
         const message = `*Nueva Solicitud en YoReparo* 🛠️\n\n` +
