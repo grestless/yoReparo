@@ -25,5 +25,5 @@ export interface ServiceRequest {
     technician_id: number | null;
     technicians?: {
         name: string;
-    };
+    } | null;
 }

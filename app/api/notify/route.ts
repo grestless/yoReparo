@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { client_name, issue_type, description, urgency, phone, location_type } = body;
+        const { client_name, issue_type, description, urgency, phone, location, location_type } = body;
 
         const apiKey = process.env.CALLMEBOT_API_KEY;
         const adminPhone = process.env.CALLMEBOT_PHONE_NUMBER; // Read from env
@@ -19,6 +19,7 @@ export async function POST(request: Request) {
             `📍 *Descripción:* ${description}\n` +
             `🚨 *Urgencia:* ${urgency}\n` +
             `📱 *Tel:* ${phone}\n\n` +
+            `📍 *Ubicación:* ${location}\n` +
             `*Tipo de cliente:* ${location_type}\n` +
             `Ver más en el panel: https://yo-reparo-ale.vercel.app/admin`;
 

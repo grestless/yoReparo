@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         }
     };
 
-    const updateStatus = async (id: number, newStatus: string, techId?: string) => {
+    const updateStatus = async (id: number, newStatus: string, techId?: string | null) => {
         const previousRequests = [...requests];
 
         // Optimistic update
@@ -68,8 +68,8 @@ export default function AdminDashboard() {
                 return {
                     ...r,
                     status: newStatus as any,
-                    technician_id: techId ? parseInt(techId) : r.technician_id,
-                    technicians: techId ? { name: techs.find(t => t.id === parseInt(techId))?.name || '' } : r.technicians
+                    technician_id: techId === null ? null : (techId ? parseInt(techId) : r.technician_id),
+                    technicians: techId === null ? null : (techId ? { name: techs.find(t => t.id === parseInt(techId))?.name || '' } : r.technicians)
                 };
             }
             return r;
@@ -81,7 +81,12 @@ export default function AdminDashboard() {
         }
 
         const updateData: any = { status: newStatus };
-        if (techId) updateData.technician_id = parseInt(techId);
+        if (techId !== undefined) updateData.technician_id = techId ? parseInt(techId) : null;
+
+        // If moving back to pendiente, ensure technician is cleared
+        if (newStatus === 'pendiente') {
+            updateData.technician_id = null;
+        }
 
         const { error } = await supabase
             .from('requests')
@@ -436,11 +441,27 @@ export default function AdminDashboard() {
                             {/* Actions Footer */}
                             <div className="p-6 border-t border-slate-100 bg-slate-50 flex gap-3 justify-end">
                                 {(selectedRequest.status === 'asignado' || selectedRequest.status === 'en_proceso') && (
+                                    <>
+                                        <button
+                                            onClick={() => updateStatus(selectedRequest.id, 'pendiente', null)}
+                                            className="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-bold hover:bg-slate-300 transition-colors"
+                                        >
+                                            Revertir a Pendiente
+                                        </button>
+                                        <button
+                                            onClick={() => updateStatus(selectedRequest.id, 'finalizado')}
+                                            className="px-4 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors"
+                                        >
+                                            Finalizar Trabajo
+                                        </button>
+                                    </>
+                                )}
+                                {selectedRequest.status === 'finalizado' && (
                                     <button
-                                        onClick={() => updateStatus(selectedRequest.id, 'finalizado')}
-                                        className="px-4 py-2 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors"
+                                        onClick={() => updateStatus(selectedRequest.id, 'asignado')}
+                                        className="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-bold hover:bg-slate-300 transition-colors"
                                     >
-                                        Finalizar Trabajo
+                                        Revertir a En Proceso
                                     </button>
                                 )}
                             </div>
