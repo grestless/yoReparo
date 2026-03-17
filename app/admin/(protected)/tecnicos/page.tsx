@@ -139,7 +139,7 @@ export default function TechniciansPage() {
                 </div>
                 <button
                     onClick={() => openModal()}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30"
+                    className="flex items-center gap-2 px-4 py-2 bg-brand text-white rounded-xl font-bold hover:bg-brand/90 transition-colors shadow-lg shadow-brand/30"
                 >
                     <Plus className="w-5 h-5" />
                     Nuevo Técnico
@@ -148,7 +148,7 @@ export default function TechniciansPage() {
 
             {loading ? (
                 <div className="flex justify-center py-20">
-                    <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+                    <Loader2 className="w-8 h-8 animate-spin text-brand" />
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -160,7 +160,7 @@ export default function TechniciansPage() {
                             className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all group"
                         >
                             <div className="flex justify-between items-start mb-4">
-                                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 group-hover:bg-brand/10 group-hover:text-brand transition-colors">
                                     <User className="w-6 h-6" />
                                 </div>
                                 <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${tech.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'
@@ -170,7 +170,7 @@ export default function TechniciansPage() {
                             </div>
 
                             <h3 className="text-lg font-bold text-slate-900 mb-1">{tech.name}</h3>
-                            <p className="text-sm text-blue-600 font-medium mb-4">{tech.role}</p>
+                            <p className="text-sm text-brand font-medium mb-4">{tech.role}</p>
 
                             <div className="space-y-2 text-sm text-slate-500 mb-6">
                                 <div className="flex items-center gap-2">
@@ -236,7 +236,7 @@ export default function TechniciansPage() {
                                         required
                                         value={formData.name}
                                         onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand outline-none"
                                     />
                                 </div>
                                 <div>
@@ -246,7 +246,7 @@ export default function TechniciansPage() {
                                         required
                                         value={formData.role}
                                         onChange={e => setFormData({ ...formData, role: e.target.value })}
-                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand outline-none"
                                     />
                                 </div>
                                 <div>
@@ -256,7 +256,7 @@ export default function TechniciansPage() {
                                         required
                                         value={formData.phone}
                                         onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand outline-none"
                                     />
                                 </div>
                                 <div>
@@ -265,7 +265,7 @@ export default function TechniciansPage() {
                                         type="email"
                                         value={formData.email}
                                         onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand outline-none"
                                     />
                                 </div>
                                 <div>
@@ -273,7 +273,7 @@ export default function TechniciansPage() {
                                     <select
                                         value={formData.status}
                                         onChange={e => setFormData({ ...formData, status: e.target.value })}
-                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand outline-none"
                                     >
                                         <option value="active">Activo</option>
                                         <option value="inactive">Inactivo</option>
@@ -283,7 +283,7 @@ export default function TechniciansPage() {
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
+                                    className="w-full py-3 bg-brand text-white font-bold rounded-xl hover:bg-brand/90 transition-colors flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
                                 >
                                     {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
                                     Guardar

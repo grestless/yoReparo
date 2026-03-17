@@ -58,7 +58,7 @@ export function ServicesPageContent() {
                         className={`
                             px-6 py-2 rounded-full font-medium transition-all duration-300
                             ${activeCategory === category.id
-                                ? "bg-blue-600 text-white shadow-lg scale-105"
+                                ? "bg-brand text-white shadow-lg scale-105"
                                 : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
                             }
                         `}
@@ -87,7 +87,7 @@ export function ServicesPageContent() {
                                 className={`
                                     bg-white rounded-3xl p-6 border transition-all duration-300 cursor-pointer group
                                     ${selected
-                                        ? "border-blue-500 ring-2 ring-blue-500 shadow-lg"
+                                        ? "border-brand ring-2 ring-brand shadow-lg"
                                         : "border-slate-100 hover:border-slate-200 hover:shadow-md"
                                     }
                                 `}
@@ -98,7 +98,7 @@ export function ServicesPageContent() {
                                         <service.icon className="w-6 h-6" />
                                     </div>
                                     {selected && (
-                                        <div className="bg-blue-100 text-blue-600 p-1 rounded-full">
+                                        <div className="bg-brand/10 text-brand p-1 rounded-full">
                                             <Check className="w-4 h-4" />
                                         </div>
                                     )}
@@ -115,8 +115,8 @@ export function ServicesPageContent() {
                                     className={`
                                         w-full py-3 rounded-xl font-bold text-sm transition-colors
                                         ${selected
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-slate-900 text-white group-hover:bg-blue-600"
+                                            ? "bg-brand text-white"
+                                            : "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-white"
                                         }
                                     `}
                                 >

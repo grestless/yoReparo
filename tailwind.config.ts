@@ -16,8 +16,16 @@ const config: Config = {
         },
         extend: {
             colors: {
+                brand: {
+                    DEFAULT: "#143120", // Dark green from reference
+                    foreground: "#FFFFFF",
+                },
+                "brand-accent": {
+                    DEFAULT: "#9be474", // Light green / Lime
+                    foreground: "#143120",
+                },
                 primary: {
-                    DEFAULT: "#2563EB", // Blue-600
+                    DEFAULT: "#143120",
                     foreground: "#FFFFFF",
                 },
                 secondary: {
@@ -25,8 +33,8 @@ const config: Config = {
                     foreground: "#1F2937", // Gray-800
                 },
                 accent: {
-                    DEFAULT: "#3B82F6", // Blue-500
-                    foreground: "#FFFFFF",
+                    DEFAULT: "#9be474",
+                    foreground: "#143120",
                 },
                 background: "#FFFFFF",
                 foreground: "#0F172A", // Slate-900

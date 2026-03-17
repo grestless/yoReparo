@@ -163,7 +163,7 @@ export default function AdminDashboard() {
                             type="month"
                             value={selectedMonth}
                             onChange={(e) => setSelectedMonth(e.target.value)}
-                            className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 font-medium focus:ring-2 focus:ring-blue-500 outline-none shadow-sm"
+                            className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-700 font-medium focus:ring-2 focus:ring-brand outline-none shadow-sm"
                         />
                     </div>
                     <button onClick={fetchRequests} className="p-2 bg-white rounded-lg border border-slate-200 hover:bg-slate-50 shadow-sm">
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
                 ) : (
                     [
                         { label: "Pendientes", value: filteredRequests.filter(r => r.status === "pendiente").length, color: "text-yellow-600", bg: "bg-yellow-50" },
-                        { label: "En Proceso", value: filteredRequests.filter(r => r.status === "en_proceso" || r.status === "asignado").length, color: "text-blue-600", bg: "bg-blue-50" },
+                        { label: "En Proceso", value: filteredRequests.filter(r => r.status === "en_proceso" || r.status === "asignado").length, color: "text-brand", bg: "bg-brand/10" },
                         { label: "Finalizados", value: filteredRequests.filter(r => r.status === "finalizado").length, color: "text-green-600", bg: "bg-green-50" },
                     ].map((stat, i) => (
                         <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
@@ -196,24 +196,24 @@ export default function AdminDashboard() {
             <div className="mb-6 flex gap-2 border-b border-slate-200">
                 <button
                     onClick={() => setActiveTab('pendientes')}
-                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'pendientes' ? 'text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'pendientes' ? 'text-brand' : 'text-slate-500 hover:text-slate-700'}`}
                 >
                     Pendientes
-                    {activeTab === 'pendientes' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
+                    {activeTab === 'pendientes' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand" />}
                 </button>
                 <button
                     onClick={() => setActiveTab('en_proceso')}
-                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'en_proceso' ? 'text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'en_proceso' ? 'text-brand' : 'text-slate-500 hover:text-slate-700'}`}
                 >
                     En Proceso
-                    {activeTab === 'en_proceso' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
+                    {activeTab === 'en_proceso' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand" />}
                 </button>
                 <button
                     onClick={() => setActiveTab('finalizados')}
-                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'finalizados' ? 'text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                    className={`pb-3 px-4 font-medium text-sm transition-colors relative ${activeTab === 'finalizados' ? 'text-brand' : 'text-slate-500 hover:text-slate-700'}`}
                 >
                     Finalizados
-                    {activeTab === 'finalizados' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" />}
+                    {activeTab === 'finalizados' && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand" />}
                 </button>
             </div>
 
@@ -311,7 +311,7 @@ export default function AdminDashboard() {
                                 <div className="flex gap-4">
                                     <div className={`px-3 py-1 rounded-full text-sm font-bold capitalize ${selectedRequest.status === 'pendiente' ? 'bg-yellow-100 text-yellow-700' :
                                         selectedRequest.status === 'finalizado' ? 'bg-green-100 text-green-700' :
-                                            'bg-blue-100 text-blue-700'
+                                            'bg-brand/10 text-brand'
                                         }`}>
                                         {selectedRequest.status.replace('_', ' ')}
                                     </div>
@@ -335,7 +335,7 @@ export default function AdminDashboard() {
                                     <div className="space-y-1">
                                         <label className="text-xs font-bold text-slate-400 uppercase">Preferencia de Turno</label>
                                         <div className="flex items-center gap-2 text-slate-700">
-                                            <Calendar className="w-4 h-4 text-blue-500" />
+                                            <Calendar className="w-4 h-4 text-brand" />
                                             <span className="font-medium">
                                                 {selectedRequest.scheduled_date ? new Date(selectedRequest.scheduled_date).toLocaleDateString() : 'Sin fecha'}
                                             </span>
@@ -370,7 +370,7 @@ export default function AdminDashboard() {
                                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedRequest.address)}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded hover:bg-blue-200 transition-colors"
+                                            className="text-xs bg-brand/10 text-brand px-2 py-1 rounded hover:bg-brand/20 transition-colors"
                                         >
                                             Ver Mapa
                                         </a>
@@ -389,7 +389,7 @@ export default function AdminDashboard() {
                                     </button>
                                     <button
                                         onClick={() => openWhatsApp(`Hola ${selectedRequest.client_name}, el técnico ${selectedRequest.technicians?.name || 'asignado'} está en camino a tu domicilio.`, selectedRequest.phone)}
-                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg font-bold hover:bg-blue-100 transition-colors"
+                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-lg font-bold hover:bg-brand/20 transition-colors"
                                     >
                                         <User className="w-4 h-4" />
                                         Técnico en Camino
@@ -407,7 +407,7 @@ export default function AdminDashboard() {
                                 <div className="border-t border-slate-100 pt-6">
                                     <label className="text-xs font-bold text-slate-400 uppercase mb-2 block">Técnico Asignado</label>
                                     {selectedRequest.technicians ? (
-                                        <div className="flex items-center gap-2 text-blue-700 font-bold bg-blue-50 px-4 py-2 rounded-lg inline-block">
+                                        <div className="flex items-center gap-2 text-brand font-bold bg-brand/10 px-4 py-2 rounded-lg inline-block">
                                             <User className="w-4 h-4" />
                                             {selectedRequest.technicians.name}
                                         </div>
@@ -415,7 +415,7 @@ export default function AdminDashboard() {
                                         <div className="flex gap-2">
                                             <div className="relative flex-1">
                                                 <select
-                                                    className="w-full appearance-none bg-slate-50 border border-slate-200 text-slate-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full appearance-none bg-slate-50 border border-slate-200 text-slate-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
                                                     value={selectedTechId}
                                                     onChange={(e) => setSelectedTechId(e.target.value)}
                                                 >
@@ -429,7 +429,7 @@ export default function AdminDashboard() {
                                             <button
                                                 disabled={!selectedTechId}
                                                 onClick={() => updateStatus(selectedRequest.id, 'asignado', selectedTechId)}
-                                                className="px-4 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="px-4 py-2 bg-brand text-white rounded-lg font-bold hover:bg-brand/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 Asignar
                                             </button>
@@ -483,7 +483,7 @@ function RequestCard({ req, onClick, onDelete }: { req: any, onClick: () => void
             className="bg-white p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-all cursor-pointer group"
         >
             <div className="flex justify-between items-start mb-3">
-                <span className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{req.client_name}</span>
+                <span className="font-bold text-slate-900 group-hover:text-brand transition-colors">{req.client_name}</span>
                 {req.urgency === "urgente" && (
                     <span className="text-xs bg-red-100 text-red-600 font-bold px-2 py-1 rounded-full flex items-center gap-1">
                         <AlertTriangle className="w-3 h-3" />
@@ -503,7 +503,7 @@ function RequestCard({ req, onClick, onDelete }: { req: any, onClick: () => void
             <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-slate-600">
                     <div className={`w-2 h-2 rounded-full ${req.status === 'pendiente' ? 'bg-yellow-500' :
-                        req.status === 'finalizado' ? 'bg-green-500' : 'bg-blue-500'
+                        req.status === 'finalizado' ? 'bg-green-500' : 'bg-brand'
                         }`} />
                     <span className="truncate">{req.services}</span>
                 </div>
@@ -515,7 +515,7 @@ function RequestCard({ req, onClick, onDelete }: { req: any, onClick: () => void
                     <Clock className="w-3 h-3" /> {new Date(req.created_at).toLocaleDateString()}
                 </div>
                 {req.technicians && (
-                    <div className="flex items-center gap-2 text-xs text-blue-600 font-medium mt-2 pt-2 border-t border-slate-50">
+                    <div className="flex items-center gap-2 text-xs text-brand font-medium mt-2 pt-2 border-t border-slate-50">
                         <User className="w-3 h-3" />
                         {req.technicians.name}
                     </div>

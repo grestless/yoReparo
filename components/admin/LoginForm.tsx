@@ -56,7 +56,7 @@ export function LoginForm() {
         <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4">
             <form onSubmit={handleLogin} className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
                 <div className="text-center mb-8">
-                    <h1 className="text-2xl font-bold text-slate-900">Acceso Administrativo</h1>
+                    <h1 className="text-2xl font-bold text-brand">Acceso Administrativo</h1>
                     <p className="text-slate-500 mt-2">Ingresa tus credenciales para continuar</p>
                 </div>
 
@@ -73,7 +73,7 @@ export function LoginForm() {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand outline-none transition-all"
                             placeholder="Usuario"
                         />
                     </div>
@@ -83,7 +83,7 @@ export function LoginForm() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand outline-none transition-all"
                             placeholder="••••••••"
                         />
                     </div>
@@ -92,7 +92,7 @@ export function LoginForm() {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors mt-6 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-brand text-white font-bold py-3 rounded-xl hover:bg-brand/90 transition-colors mt-6 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {loading ? (
                         <>

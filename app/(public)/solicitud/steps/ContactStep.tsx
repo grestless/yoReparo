@@ -24,7 +24,7 @@ export default function ContactStep({ onSubmit }: ContactStepProps) {
                             <input
                                 type="text"
                                 {...register("name")}
-                                className={`w-full pl-10 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none ${errors.name ? "border-red-500" : "border-slate-200"
+                                className={`w-full pl-10 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none ${errors.name ? "border-red-500" : "border-slate-200"
                                     }`}
                                 placeholder="Tu nombre"
                             />
@@ -40,7 +40,7 @@ export default function ContactStep({ onSubmit }: ContactStepProps) {
                             <input
                                 type="tel"
                                 {...register("phone")}
-                                className={`w-full pl-10 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none ${errors.phone ? "border-red-500" : "border-slate-200"
+                                className={`w-full pl-10 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none ${errors.phone ? "border-red-500" : "border-slate-200"
                                     }`}
                                 placeholder="11 1234 5678"
                             />
@@ -58,7 +58,7 @@ export default function ContactStep({ onSubmit }: ContactStepProps) {
                         <input
                             type="text"
                             {...register("address")}
-                            className={`w-full pl-10 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none ${errors.address ? "border-red-500" : "border-slate-200"
+                            className={`w-full pl-10 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none ${errors.address ? "border-red-500" : "border-slate-200"
                                 }`}
                             placeholder="Calle y Altura"
                         />
@@ -68,9 +68,9 @@ export default function ContactStep({ onSubmit }: ContactStepProps) {
                     )}
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-xl flex gap-3 items-start mt-4">
-                    <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-blue-800">
+                <div className="bg-brand/5 p-4 rounded-xl flex gap-3 items-start mt-4">
+                    <CheckCircle className="w-5 h-5 text-brand mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-brand-foreground/80 md:text-black">
                         Al confirmar, un técnico revisará tu solicitud y te contactará para coordinar la visita.
                     </p>
                 </div>

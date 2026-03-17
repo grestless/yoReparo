@@ -20,7 +20,7 @@ const faqs = [
 
 export function FAQ() {
     return (
-        <section className="py-20 bg-slate-900 text-white">
+        <section className="py-20 bg-brand text-white">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -36,13 +36,13 @@ export function FAQ() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-slate-800 p-6 rounded-2xl border border-slate-700"
+                            className="bg-white p-6 rounded-2xl border border-slate-700"
                         >
                             <div className="flex items-start gap-4">
                                 <HelpCircle className="w-6 h-6 text-primary mt-1 shrink-0" />
                                 <div>
-                                    <h3 className="text-xl font-bold mb-2">{faq.question}</h3>
-                                    <p className="text-slate-400">{faq.answer}</p>
+                                    <h3 className="text-xl text-brand font-bold mb-2">{faq.question}</h3>
+                                    <p className="text-brand">{faq.answer}</p>
                                 </div>
                             </div>
                         </motion.div>

@@ -21,8 +21,8 @@ export default function StatusSearchPage() {
         <main className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 relative overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-3xl" />
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-accent/20 rounded-full blur-3xl" />
             </div>
 
             <motion.div
@@ -33,7 +33,7 @@ export default function StatusSearchPage() {
                 <div className="text-center mb-8">
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 mb-6 transition-colors text-sm font-medium"
+                        className="inline-flex items-center gap-2 text-slate-500 hover:text-brand mb-6 transition-colors text-sm font-medium"
                     >
                         <Home className="w-4 h-4" /> Volver al Inicio
                     </Link>
@@ -55,7 +55,7 @@ export default function StatusSearchPage() {
                                     value={requestId}
                                     onChange={(e) => setRequestId(e.target.value)}
                                     placeholder="Ej: 1234"
-                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white transition-all"
                                     required
                                 />
                             </div>
@@ -64,7 +64,7 @@ export default function StatusSearchPage() {
                         <button
                             type="submit"
                             disabled={!requestId}
-                            className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20"
+                            className="w-full bg-brand text-white font-bold py-4 rounded-xl hover:bg-brand/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 shadow-lg shadow-brand/20"
                         >
                             Ver Estado <ArrowRight className="w-5 h-5" />
                         </button>

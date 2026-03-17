@@ -20,13 +20,13 @@ export default function SuccessScreen({ id }: SuccessScreenProps) {
 
                     <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-8">
                         <p className="text-sm text-slate-500 mb-2 uppercase tracking-wide font-bold">Tu ID de Solicitud</p>
-                        <p className="text-4xl font-black text-blue-600">#{id}</p>
+                        <p className="text-4xl font-black text-brand">#{id}</p>
                         <p className="text-xs text-slate-400 mt-2">Guardá este número para consultar el estado</p>
                     </div>
 
                     <Link
                         href={`/estado/${id}`}
-                        className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:scale-[1.02]"
+                        className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-brand hover:bg-brand/90 text-white rounded-xl font-bold shadow-lg shadow-brand/30 transition-all transform hover:scale-[1.02]"
                     >
                         <Search className="w-5 h-5" />
                         Ver Estado de mi Solicitud

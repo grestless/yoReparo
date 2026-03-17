@@ -35,7 +35,7 @@ export function AdminSidebar() {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-slate-900 text-white rounded-lg shadow-lg"
+                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-brand text-white rounded-lg shadow-lg"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -50,11 +50,11 @@ export function AdminSidebar() {
 
             {/* Sidebar */}
             <aside className={`
-                fixed md:static inset-y-0 left-0 z-40 w-64 bg-slate-900 text-white flex flex-col p-6 transition-transform duration-300 ease-in-out
+                fixed md:static inset-y-0 left-0 z-40 w-64 bg-brand text-white flex flex-col p-6 transition-transform duration-300 ease-in-out
                 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
             `}>
-                <div className="text-2xl font-bold mb-10 text-blue-400 flex items-center gap-2">
-                    <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white">
+                <div className="text-2xl font-bold mb-10 text-brand-accent flex items-center gap-2">
+                    <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white">
 
                     </div>
                     YoReparo
@@ -68,7 +68,7 @@ export function AdminSidebar() {
                                 key={item.href}
                                 href={item.href}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${isActive
-                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-900/20"
+                                    ? "bg-brand text-white shadow-lg shadow-brand/20"
                                     : "text-slate-400 hover:text-white hover:bg-slate-800"
                                     }`}
                             >

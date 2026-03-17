@@ -63,7 +63,7 @@ export default function StatusPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-50">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand"></div>
             </div>
         );
     }
@@ -74,7 +74,7 @@ export default function StatusPage() {
                 <AlertTriangle className="w-16 h-16 text-yellow-500 mb-4" />
                 <h1 className="text-2xl font-bold text-slate-900 mb-2">Solicitud no encontrada</h1>
                 <p className="text-slate-500 mb-8">Verificá que el enlace sea correcto.</p>
-                <Link href="/" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors">
+                <Link href="/" className="px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brand/90 transition-colors">
                     Volver al Inicio
                 </Link>
             </div>
@@ -170,7 +170,7 @@ export default function StatusPage() {
                         className="bg-white rounded-3xl shadow-lg p-6 border border-slate-100"
                     >
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-full bg-brand/10 text-brand flex items-center justify-center">
                                 <Calendar className="w-5 h-5" />
                             </div>
                             <div>
@@ -216,7 +216,7 @@ export default function StatusPage() {
                                     👨‍🔧
                                 </div>
                                 <p className="font-bold text-lg text-slate-800">{request.technicians.name}</p>
-                                <p className="text-blue-600 text-sm font-medium">{request.technicians.role}</p>
+                                <p className="text-brand text-sm font-medium">{request.technicians.role}</p>
                             </div>
                         ) : (
                             <div className="h-32 flex flex-col items-center justify-center text-slate-400 border-2 border-dashed border-slate-100 rounded-xl">
@@ -233,10 +233,10 @@ export default function StatusPage() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="bg-gradient-to-br from-blue-600 to-purple-700 rounded-3xl shadow-xl p-8 text-white text-center mb-10"
+                        className="bg-gradient-to-br from-brand to-brand/90 rounded-3xl shadow-xl p-8 text-white text-center mb-10"
                     >
                         <h3 className="text-2xl font-bold mb-2">¿Cómo estuvo el servicio?</h3>
-                        <p className="text-blue-100 mb-6">Tu opinión nos ayuda a mejorar.</p>
+                        <p className="text-white/80 mb-6">Tu opinión nos ayuda a mejorar.</p>
 
                         {!feedbackSubmitted ? (
                             <div className="space-y-6">
@@ -245,7 +245,7 @@ export default function StatusPage() {
                                         <button
                                             key={star}
                                             onClick={() => setRating(star)}
-                                            className={`transition-all hover:scale-110 ${rating >= star ? "text-yellow-400 fill-yellow-400" : "text-blue-300"
+                                            className={`transition-all hover:scale-110 ${rating >= star ? "text-yellow-400 fill-yellow-400" : "text-white/30"
                                                 }`}
                                         >
                                             <Star className="w-10 h-10 fill-current" />
@@ -256,13 +256,13 @@ export default function StatusPage() {
                                     value={feedback}
                                     onChange={(e) => setFeedback(e.target.value)}
                                     placeholder="Dejanos un comentario (opcional)..."
-                                    className="w-full bg-white/10 border border-white/20 rounded-xl p-4 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none"
+                                    className="w-full bg-white/10 border border-white/20 rounded-xl p-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none"
                                     rows={3}
                                 />
                                 <button
                                     onClick={submitFeedback}
                                     disabled={rating === 0}
-                                    className="px-8 py-3 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                                    className="px-8 py-3 bg-white text-brand rounded-xl font-bold hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                                 >
                                     Enviar Calificación
                                 </button>
@@ -273,7 +273,7 @@ export default function StatusPage() {
                                     <CheckCircle className="w-8 h-8 text-white" />
                                 </div>
                                 <h4 className="text-xl font-bold">¡Gracias por tu feedback!</h4>
-                                <p className="text-blue-100">Nos alegra haberte ayudado.</p>
+                                <p className="text-white/80">Nos alegra haberte ayudado.</p>
                             </div>
                         )}
                     </motion.div>

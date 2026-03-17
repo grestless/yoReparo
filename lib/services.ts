@@ -14,7 +14,7 @@ export const services: Service[] = [
     {
         id: "aire-acondicionado-instalacion",
         title: "Instalación Aire Acondicionado",
-        description: "Instalación completa split o ventana con bomba de vacío.",
+        description: "Instalación completa split o ventana.",
         icon: Snowflake,
         color: "bg-blue-50 text-blue-600",
         category: "Climatización",

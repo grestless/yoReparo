@@ -31,11 +31,11 @@ export default function LocationStep({ onNext }: LocationStepProps) {
                             onNext();
                         }}
                         className={`flex flex-col items-center p-6 rounded-2xl border-2 transition-all hover:scale-105 ${locationType === type.id
-                            ? "border-blue-500 bg-blue-50 ring-2 ring-blue-200"
-                            : "border-slate-100 hover:border-blue-300 hover:shadow-lg"
+                            ? "border-brand bg-brand/5 ring-2 ring-brand/20"
+                            : "border-slate-100 hover:border-brand/30 hover:shadow-lg"
                             }`}
                     >
-                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${locationType === type.id ? "bg-blue-100 text-blue-600" : "bg-slate-100 text-slate-500"
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${locationType === type.id ? "bg-brand/10 text-brand" : "bg-slate-100 text-slate-500"
                             }`}>
                             <type.icon className="w-8 h-8" />
                         </div>

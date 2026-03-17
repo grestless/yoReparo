@@ -196,7 +196,7 @@ export default function RequestPage() {
                             <div className="flex justify-between items-center relative">
                                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200 rounded-full -z-10" />
                                 <motion.div
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-blue-600 rounded-full -z-10"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-brand rounded-full -z-10"
                                     initial={{ width: "0%" }}
                                     animate={{ width: `${(currentStep / (STEPS.length - 1)) * 100}%` }}
                                     transition={{ duration: 0.3 }}
@@ -208,13 +208,13 @@ export default function RequestPage() {
                                         <div key={step.id} className="flex flex-col items-center gap-2 bg-slate-50 px-2">
                                             <div
                                                 className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive
-                                                    ? "bg-blue-600 border-blue-600 text-white shadow-lg scale-110"
+                                                    ? "bg-brand border-brand text-white shadow-lg scale-110"
                                                     : "bg-white border-slate-300 text-slate-400"
                                                     }`}
                                             >
                                                 <step.icon className="w-5 h-5" />
                                             </div>
-                                            <span className={`text-xs font-medium transition-colors ${isActive ? "text-blue-700" : "text-slate-400"}`}>
+                                            <span className={`text-xs font-medium transition-colors ${isActive ? "text-brand" : "text-slate-400"}`}>
                                                 {step.title}
                                             </span>
                                         </div>
@@ -227,7 +227,7 @@ export default function RequestPage() {
                         <div className="bg-white rounded-3xl shadow-xl overflow-hidden min-h-[500px] flex flex-col relative">
 
                             {/* Header */}
-                            <div className="bg-slate-900 text-white p-6 flex justify-between items-center">
+                            <div className="bg-brand text-white p-6 flex justify-between items-center">
                                 <h2 className="text-xl font-bold flex items-center gap-2">
                                     {STEPS[currentStep].title}
                                 </h2>
@@ -278,7 +278,7 @@ export default function RequestPage() {
                                         type="submit"
                                         form="wizard-form"
                                         disabled={isSubmitting}
-                                        className="flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg hover:shadow-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="flex items-center gap-2 px-8 py-3 bg-brand hover:bg-brand/90 text-white rounded-xl font-bold shadow-lg hover:shadow-brand/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? "Enviando..." : "Confirmar Solicitud"}
                                         {!isSubmitting && <Send className="w-5 h-5" />}
@@ -287,7 +287,7 @@ export default function RequestPage() {
                                     <button
                                         type="button"
                                         onClick={handleNext}
-                                        className="flex items-center gap-2 px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="flex items-center gap-2 px-8 py-3 bg-brand hover:bg-brand/90 text-white rounded-xl font-bold shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         Siguiente
                                         <ArrowRight className="w-5 h-5" />

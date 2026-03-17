@@ -5,12 +5,18 @@ import { ShoppingCart, Wrench, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useService } from "@/context/ServiceContext";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export function Header() {
     const { selectedServices } = useService();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Header should be dark if we are scrolled or not on the home page (since home page has a dark hero section)
+    const isHomePage = pathname === "/";
+    const headerIsDark = scrolled || !isHomePage;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,7 +30,7 @@ export function Header() {
         { name: "Inicio", href: "/" },
         { name: "Servicios", href: "/servicios" },
         { name: "Estado", href: "/estado" },
-        { name: "Nosotros", href: "/#nosotros" },
+
     ];
 
     return (
@@ -35,23 +41,24 @@ export function Header() {
                 transition={{ duration: 0.5 }}
                 className={cn(
                     "fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 transition-all duration-300",
-                    scrolled ? "pt-2" : "pt-6"
+                    headerIsDark ? "pt-2" : "pt-6"
                 )}
             >
                 <nav
                     className={cn(
                         "flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300",
-                        "bg-white/80 backdrop-blur-md border border-white/20 shadow-lg",
                         "w-full max-w-5xl",
-                        scrolled ? "py-2 bg-white/90 shadow-xl" : ""
+                        headerIsDark
+                            ? "py-2 bg-brand/95 shadow-xl border-white/20 backdrop-blur-md"
+                            : "bg-white/10 backdrop-blur-md border border-white/10"
                     )}
                 >
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="bg-primary/10 p-2 rounded-full group-hover:bg-primary/20 transition-colors">
-                            <Wrench className="w-5 h-5 text-primary" />
+                        <div className="bg-brand-accent/20 p-2 rounded-full group-hover:bg-brand-accent/30 transition-colors">
+                            <Wrench className="w-5 h-5 text-brand-accent" />
                         </div>
-                        <span className="font-bold text-xl tracking-tight text-slate-800 group-hover:text-primary transition-colors">
+                        <span className="font-bold text-xl tracking-tight text-white group-hover:text-brand-accent transition-colors">
                             YoReparo
                         </span>
                     </Link>
@@ -62,7 +69,7 @@ export function Header() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors rounded-full hover:bg-slate-100/50"
+                                className="relative px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors rounded-full hover:bg-white/10"
                             >
                                 {link.name}
                             </Link>
@@ -75,12 +82,12 @@ export function Header() {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="bg-gradient-to-r from-primary to-blue-600 text-white px-5 py-2.5 rounded-full flex items-center gap-2 text-sm font-medium shadow-md hover:shadow-lg transition-all"
+                                className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-full flex items-center gap-2 text-sm font-medium transition-all"
                             >
                                 <ShoppingCart className="w-4 h-4" />
                                 <span className="hidden sm:inline">Mi Solicitud</span>
                                 {selectedServices.length > 0 && (
-                                    <span className="bg-white text-primary text-xs font-bold px-1.5 py-0.5 rounded-full">
+                                    <span className="bg-brand-accent text-brand text-xs font-bold px-1.5 py-0.5 rounded-full">
                                         {selectedServices.length}
                                     </span>
                                 )}
@@ -90,7 +97,7 @@ export function Header() {
                         {/* Mobile Menu Toggle */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
+                            className="md:hidden p-2 text-white hover:bg-white/10 rounded-full transition-colors"
                         >
                             {mobileMenuOpen ? (
                                 <X className="w-6 h-6" />

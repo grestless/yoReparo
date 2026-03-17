@@ -29,7 +29,7 @@ export default function AvailabilityStep() {
                             type="date"
                             {...register("scheduledDate")}
                             min={new Date().toISOString().split('T')[0]}
-                            className={`px-6 py-3 rounded-xl border text-slate-700 font-medium focus:ring-2 focus:ring-blue-500 outline-none shadow-sm w-full max-w-xs ${errors.scheduledDate ? "border-red-500" : "border-slate-200"
+                            className={`px-6 py-3 rounded-xl border text-slate-700 font-medium focus:ring-2 focus:ring-brand outline-none shadow-sm w-full max-w-xs ${errors.scheduledDate ? "border-red-500" : "border-slate-200"
                                 }`}
                         />
                         {errors.scheduledDate && (
@@ -50,11 +50,11 @@ export default function AvailabilityStep() {
                                 type="button"
                                 onClick={() => setValue("timeSlot", slot.id)}
                                 className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-2 ${timeSlot === slot.id
-                                    ? "border-blue-500 bg-blue-50 text-blue-700"
-                                    : "border-slate-100 hover:border-blue-200 text-slate-600"
+                                    ? "border-brand bg-brand/5 text-brand"
+                                    : "border-slate-100 hover:border-brand/30 text-slate-600"
                                     }`}
                             >
-                                <slot.icon className={`w-6 h-6 ${timeSlot === slot.id ? "text-blue-500" : "text-slate-400"}`} />
+                                <slot.icon className={`w-6 h-6 ${timeSlot === slot.id ? "text-brand" : "text-slate-400"}`} />
                                 <span className="font-bold">{slot.label}</span>
                                 <span className="text-xs opacity-80">{slot.time}</span>
                             </button>
@@ -65,9 +65,9 @@ export default function AvailabilityStep() {
                     )}
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-xl flex gap-3 items-start">
-                    <Clock className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-blue-800">
+                <div className="bg-brand/5 p-4 rounded-xl flex gap-3 items-start">
+                    <Clock className="w-5 h-5 text-brand mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-brand-foreground/80 md:text-black">
                         Haremos lo posible por cumplir tu preferencia. El técnico te confirmará el horario exacto.
                     </p>
                 </div>

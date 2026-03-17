@@ -46,8 +46,8 @@ export function ServicesBento() {
                                     group relative overflow-hidden rounded-3xl p-6 md:p-8 cursor-pointer transition-all duration-300
                                     border hover:shadow-lg
                                     ${selected
-                                            ? 'bg-white border-blue-500 ring-1 ring-blue-500 shadow-md'
-                                            : 'bg-white border-slate-100 hover:border-blue-500'
+                                            ? 'bg-white border-brand ring-1 ring-brand shadow-md'
+                                            : 'bg-white border-slate-100 hover:border-brand'
                                         }
                                 `}
                                 >
@@ -58,13 +58,13 @@ export function ServicesBento() {
                                                     <service.icon className="w-8 h-8" />
                                                 </div>
                                                 {selected && (
-                                                    <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                                    <div className="absolute top-0 right-0 bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                                                         ✓
                                                     </div>
                                                 )}
                                             </div>
 
-                                            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                                            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-brand transition-colors">
                                                 {service.title}
                                             </h3>
                                             <p className="text-slate-500 text-sm font-medium leading-relaxed">

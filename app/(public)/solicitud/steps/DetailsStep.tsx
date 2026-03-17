@@ -38,8 +38,8 @@ export default function DetailsStep() {
                                 type="button"
                                 onClick={() => setValue("issueType", issue)}
                                 className={`px-4 py-2 rounded-full text-sm border transition-all ${issueType === issue
-                                    ? "bg-blue-600 text-white border-blue-600"
-                                    : "bg-white text-slate-600 border-slate-200 hover:border-blue-400"
+                                    ? "bg-brand text-white border-brand"
+                                    : "bg-white text-slate-600 border-slate-200 hover:border-brand"
                                     }`}
                             >
                                 {issue}
@@ -56,7 +56,7 @@ export default function DetailsStep() {
                     <textarea
                         {...register("message")}
                         rows={4}
-                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none ${errors.message ? "border-red-500" : "border-slate-200"
+                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none transition-all resize-none ${errors.message ? "border-red-500" : "border-slate-200"
                             }`}
                         placeholder="Contanos más detalles..."
                     />
