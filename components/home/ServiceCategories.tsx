@@ -173,7 +173,9 @@ export function ServiceCategories() {
                                 </div>
                             </div>
                             <Link 
-                                href="/contacto" 
+                                href="https://wa.me/5493816694147?text=Hola,%20me%20gustaría%20consultar%20por%20un%20servicio%20de%20YoReparo" 
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-6 py-3.5 rounded-full font-semibold transition-colors flex items-center gap-2 shadow-sm w-full sm:w-auto justify-center group"
                             >
                                 Contactar Especialista
