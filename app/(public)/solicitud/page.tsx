@@ -202,18 +202,21 @@ export default function RequestPage() {
                         {/* Progress Bar - Mobile optimized */}
                         <div className="mb-6 md:mb-8">
                             <div className="flex justify-between items-center relative px-2 sm:px-4">
-                                <div className="absolute left-0 top-[18px] md:top-5 w-full h-1 bg-slate-200 rounded-full -z-10" />
-                                <motion.div
-                                    className="absolute left-0 top-[18px] md:top-5 h-1 bg-brand rounded-full -z-10"
-                                    initial={{ width: "0%" }}
-                                    animate={{ width: `${(currentStep / (STEPS.length - 1)) * 100}%` }}
-                                    transition={{ duration: 0.3 }}
-                                />
+                                <div className="absolute left-0 top-[18px] md:top-5 w-full px-[32px] md:px-[44px] -z-10">
+                                    <div className="relative w-full h-[3px] bg-slate-200 rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="absolute left-0 top-0 h-full bg-brand"
+                                            initial={{ width: "0%" }}
+                                            animate={{ width: `${(currentStep / (STEPS.length - 1)) * 100}%` }}
+                                            transition={{ duration: 0.3 }}
+                                        />
+                                    </div>
+                                </div>
 
                                 {STEPS.map((step, index) => {
                                     const isActive = index <= currentStep;
                                     return (
-                                        <div key={step.id} className="flex flex-col items-center gap-1.5 md:gap-2 bg-slate-50/80 px-1 sm:px-2">
+                                        <div key={step.id} className="flex flex-col items-center gap-1.5 md:gap-2 bg-slate-50 px-2 md:px-3 relative z-10">
                                             <div
                                                 className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive
                                                     ? "bg-brand border-brand text-white shadow-lg"
