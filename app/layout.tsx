@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Serif_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSerifDisplay = DM_Serif_Display({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
 
 export const metadata: Metadata = {
   title: "YoReparo - Servicios Técnicos Integrales",
@@ -64,7 +73,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={`${dmSans.variable} ${dmSerifDisplay.variable} font-sans antialiased`}>
         <Providers>
           {children}
           <Toaster richColors position="top-center" />
