@@ -34,7 +34,7 @@ const heroServices = [
 
 export function Hero() {
     return (
-        <section className="relative bg-brand text-brand-foreground min-h-screen lg:min-h-[90vh] flex items-center -mt-16 pt-20 md:pt-24 pb-12 md:pb-16 overflow-hidden">
+        <section className="relative bg-brand text-brand-foreground min-h-screen lg:min-h-[90vh] flex items-center -mt-16 pt-28 md:pt-36 pb-12 md:pb-16 overflow-hidden">
             {/* Subtle texture overlay */}
             <div 
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
