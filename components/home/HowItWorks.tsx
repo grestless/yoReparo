@@ -30,13 +30,13 @@ export function HowItWorks() {
     return (
         <section className="py-24 relative overflow-hidden bg-slate-50/80">
             {/* Subtle texture */}
-            <div 
+            <div
                 className="absolute inset-0 opacity-[0.02] pointer-events-none"
                 style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
                 }}
             />
-            
+
             <div className="container mx-auto px-4 max-w-7xl relative z-10">
                 <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 justify-center">
 
@@ -76,12 +76,12 @@ export function HowItWorks() {
                                     <div className="absolute top-3 right-4 text-5xl font-bold text-slate-100 select-none z-0 font-serif">
                                         {step.number}
                                     </div>
-                                    
+
                                     {/* Badge number */}
                                     <div className="skeuo-badge w-11 h-11 shrink-0 rounded-full flex items-center justify-center font-semibold mb-4 xl:mb-0 xl:mr-4 relative z-10 text-sm text-brand-accent">
                                         {step.number}
                                     </div>
-                                    
+
                                     <div className="relative z-10">
                                         <h3 className="text-base font-semibold text-slate-900 mb-2">
                                             {step.title}
@@ -97,18 +97,18 @@ export function HowItWorks() {
 
                     {/* Right Content: Image */}
                     <div className="w-full lg:w-1/2 hidden lg:flex relative min-h-[500px] h-full items-center justify-center">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
-                            className="relative w-full h-[550px]"
+                            className="relative w-full h-[550px] rounded-3xl overflow-hidden skeuo-image"
                         >
                             <Image
                                 src="/hero-derecha.png"
                                 alt="Tecnico profesional"
                                 fill
-                                className="object-contain drop-shadow-2xl"
+                                className="object-cover transition-transform duration-500 hover:scale-105"
                                 priority
                             />
                         </motion.div>
