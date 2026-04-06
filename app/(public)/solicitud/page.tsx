@@ -24,7 +24,7 @@ import SuccessScreen from "./steps/SuccessScreen";
 
 // Steps definition
 const STEPS = [
-    { id: 0, title: "Ubicación", icon: MapPin },
+    { id: 0, title: "Ubicacion", icon: MapPin },
     { id: 1, title: "Servicio", icon: Home },
     { id: 2, title: "Disponibilidad", icon: Calendar },
     { id: 3, title: "Detalles", icon: AlertTriangle },
@@ -34,7 +34,7 @@ const STEPS = [
 export default function RequestPage() {
     const { selectedServices, clearServices } = useService();
     const [currentStep, setCurrentStep] = useState(0);
-    const [direction, setDirection] = useState(0); // -1 for back, 1 for next
+    const [direction, setDirection] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successData, setSuccessData] = useState<{ id: number } | null>(null);
     const router = useRouter();
@@ -84,7 +84,7 @@ export default function RequestPage() {
             isValid = await trigger("locationType");
         } else if (currentStep === 1) {
             if (selectedServices.length === 0) {
-                toast.error("Debés seleccionar al menos un servicio.");
+                toast.error("Debes seleccionar al menos un servicio.");
                 return;
             }
             isValid = await trigger("urgency");
@@ -144,7 +144,7 @@ export default function RequestPage() {
             if (error) throw error;
 
             setSuccessData({ id: result.id });
-            toast.success("¡Solicitud enviada con éxito!");
+            toast.success("Solicitud enviada con exito!");
 
             // Send WhatsApp Notification (Fire and forget)
             fetch("/api/notify", {
@@ -159,7 +159,7 @@ export default function RequestPage() {
 
         } catch (error) {
             console.error("Error submitting request:", error);
-            toast.error("Hubo un error al enviar la solicitud. Intentá nuevamente.");
+            toast.error("Hubo un error al enviar la solicitud. Intenta nuevamente.");
         } finally {
             setIsSubmitting(false);
         }
@@ -168,7 +168,7 @@ export default function RequestPage() {
     // Animation Variants
     const slideVariants = {
         enter: (direction: number) => ({
-            x: direction > 0 ? 50 : -50,
+            x: direction > 0 ? 30 : -30,
             opacity: 0,
         }),
         center: {
@@ -176,7 +176,7 @@ export default function RequestPage() {
             opacity: 1,
         },
         exit: (direction: number) => ({
-            x: direction > 0 ? -50 : 50,
+            x: direction > 0 ? -30 : 30,
             opacity: 0,
         }),
     };
@@ -187,16 +187,24 @@ export default function RequestPage() {
 
     return (
         <FormProvider {...methods}>
-            <main className="min-h-screen bg-slate-50 pt-32 pb-20">
-                <div className="container mx-auto px-4">
+            <main className="min-h-screen bg-slate-50/80 pt-20 md:pt-28 pb-12 md:pb-20 relative">
+                {/* Subtle texture */}
+                <div 
+                    className="fixed inset-0 opacity-[0.015] pointer-events-none"
+                    style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    }}
+                />
+                
+                <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto">
 
-                        {/* Progress Bar */}
-                        <div className="mb-8">
-                            <div className="flex justify-between items-center relative">
-                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200 rounded-full -z-10" />
+                        {/* Progress Bar - Mobile optimized */}
+                        <div className="mb-6 md:mb-8">
+                            <div className="flex justify-between items-center relative px-2 sm:px-4">
+                                <div className="absolute left-0 top-[18px] md:top-5 w-full h-1 bg-slate-200 rounded-full -z-10" />
                                 <motion.div
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-brand rounded-full -z-10"
+                                    className="absolute left-0 top-[18px] md:top-5 h-1 bg-brand rounded-full -z-10"
                                     initial={{ width: "0%" }}
                                     animate={{ width: `${(currentStep / (STEPS.length - 1)) * 100}%` }}
                                     transition={{ duration: 0.3 }}
@@ -205,16 +213,17 @@ export default function RequestPage() {
                                 {STEPS.map((step, index) => {
                                     const isActive = index <= currentStep;
                                     return (
-                                        <div key={step.id} className="flex flex-col items-center gap-2 bg-slate-50 px-2">
+                                        <div key={step.id} className="flex flex-col items-center gap-1.5 md:gap-2 bg-slate-50/80 px-1 sm:px-2">
                                             <div
-                                                className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive
-                                                    ? "bg-brand border-brand text-white shadow-lg scale-110"
+                                                className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive
+                                                    ? "bg-brand border-brand text-white shadow-lg"
                                                     : "bg-white border-slate-300 text-slate-400"
                                                     }`}
+                                                style={isActive ? { boxShadow: '0 4px 12px rgba(20, 49, 32, 0.25)' } : {}}
                                             >
-                                                <step.icon className="w-5 h-5" />
+                                                <step.icon className="w-4 h-4 md:w-5 md:h-5" />
                                             </div>
-                                            <span className={`text-xs font-medium transition-colors ${isActive ? "text-brand" : "text-slate-400"}`}>
+                                            <span className={`text-[9px] sm:text-[10px] md:text-xs font-medium transition-colors text-center ${isActive ? "text-brand" : "text-slate-400"}`}>
                                                 {step.title}
                                             </span>
                                         </div>
@@ -224,20 +233,27 @@ export default function RequestPage() {
                         </div>
 
                         {/* Wizard Card */}
-                        <div className="bg-white rounded-3xl shadow-xl overflow-hidden min-h-[500px] flex flex-col relative">
+                        <div className="skeuo-card rounded-2xl md:rounded-3xl overflow-hidden min-h-[450px] md:min-h-[500px] flex flex-col relative">
 
                             {/* Header */}
-                            <div className="bg-brand text-white p-6 flex justify-between items-center">
-                                <h2 className="text-xl font-bold flex items-center gap-2">
+                            <div className="bg-brand text-white p-4 md:p-6 flex justify-between items-center relative overflow-hidden">
+                                {/* Texture */}
+                                <div 
+                                    className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                                    style={{
+                                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                                    }}
+                                />
+                                <h2 className="font-serif text-lg md:text-xl flex items-center gap-2 relative z-10">
                                     {STEPS[currentStep].title}
                                 </h2>
-                                <div className="text-sm text-slate-400">
+                                <div className="text-xs md:text-sm text-white/60 relative z-10">
                                     Paso {currentStep + 1} de {STEPS.length}
                                 </div>
                             </div>
 
                             {/* Content Area */}
-                            <div className="p-8 flex-grow flex flex-col relative overflow-hidden">
+                            <div className="p-4 sm:p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden">
                                 <AnimatePresence mode="wait" custom={direction}>
                                     <motion.div
                                         key={currentStep}
@@ -246,7 +262,7 @@ export default function RequestPage() {
                                         initial="enter"
                                         animate="center"
                                         exit="exit"
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        transition={{ duration: 0.25, ease: "easeInOut" }}
                                         className="flex-grow flex flex-col"
                                     >
                                         {currentStep === 0 && <LocationStep onNext={handleNext} />}
@@ -259,18 +275,19 @@ export default function RequestPage() {
                             </div>
 
                             {/* Footer / Navigation */}
-                            <div className="p-6 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
+                            <div className="p-4 md:p-6 border-t border-slate-100 bg-slate-50/80 flex justify-between items-center"
+                                 style={{ boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.04)' }}>
                                 <button
                                     type="button"
                                     onClick={handleBack}
                                     disabled={currentStep === 0}
-                                    className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${currentStep === 0
+                                    className={`flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-xl font-semibold transition-all text-sm md:text-base ${currentStep === 0
                                         ? "opacity-0 pointer-events-none"
                                         : "text-slate-600 hover:bg-slate-200"
                                         }`}
                                 >
-                                    <ArrowLeft className="w-5 h-5" />
-                                    Volver
+                                    <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+                                    <span className="hidden sm:inline">Volver</span>
                                 </button>
 
                                 {currentStep === STEPS.length - 1 ? (
@@ -278,19 +295,19 @@ export default function RequestPage() {
                                         type="submit"
                                         form="wizard-form"
                                         disabled={isSubmitting}
-                                        className="flex items-center gap-2 px-8 py-3 bg-brand hover:bg-brand/90 text-white rounded-xl font-bold shadow-lg hover:shadow-brand/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="skeuo-button flex items-center gap-2 px-5 md:px-8 py-2.5 md:py-3 rounded-xl font-semibold text-brand disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
                                     >
-                                        {isSubmitting ? "Enviando..." : "Confirmar Solicitud"}
-                                        {!isSubmitting && <Send className="w-5 h-5" />}
+                                        {isSubmitting ? "Enviando..." : "Confirmar"}
+                                        {!isSubmitting && <Send className="w-4 h-4 md:w-5 md:h-5" />}
                                     </button>
                                 ) : (
                                     <button
                                         type="button"
                                         onClick={handleNext}
-                                        className="flex items-center gap-2 px-8 py-3 bg-brand hover:bg-brand/90 text-white rounded-xl font-bold shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="skeuo-button flex items-center gap-2 px-5 md:px-8 py-2.5 md:py-3 rounded-xl font-semibold text-brand disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base"
                                     >
                                         Siguiente
-                                        <ArrowRight className="w-5 h-5" />
+                                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                                     </button>
                                 )}
                             </div>

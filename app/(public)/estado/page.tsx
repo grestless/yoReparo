@@ -18,17 +18,19 @@ export default function StatusSearchPage() {
     };
 
     return (
-        <main className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-            {/* Background Decoration */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-accent/20 rounded-full blur-3xl" />
-            </div>
+        <main className="min-h-screen bg-slate-50/80 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+            {/* Subtle texture */}
+            <div 
+                className="absolute inset-0 opacity-[0.015] pointer-events-none"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                }}
+            />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="w-full max-w-md relative z-10"
+                className="w-full max-w-md relative z-10 px-4"
             >
                 <div className="text-center mb-8">
                     <Link
@@ -37,15 +39,15 @@ export default function StatusSearchPage() {
                     >
                         <Home className="w-4 h-4" /> Volver al Inicio
                     </Link>
-                    <h1 className="text-3xl font-bold text-slate-900 mb-2">Estado de Reparación</h1>
-                    <p className="text-slate-500">Ingresá el número de tu solicitud para ver el estado en tiempo real.</p>
+                    <h1 className="font-serif text-2xl sm:text-3xl text-brand mb-2">Estado de Reparacion</h1>
+                    <p className="text-slate-500 text-sm sm:text-base">Ingresa el numero de tu solicitud para ver el estado en tiempo real.</p>
                 </div>
 
-                <div className="bg-white rounded-3xl shadow-xl p-8 border border-slate-100">
+                <div className="skeuo-card rounded-2xl md:rounded-3xl p-6 sm:p-8">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
-                            <label htmlFor="requestId" className="text-sm font-bold text-slate-700 ml-1">
-                                Número de Solicitud
+                            <label htmlFor="requestId" className="text-sm font-semibold text-slate-700 ml-1">
+                                Numero de Solicitud
                             </label>
                             <div className="relative">
                                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -55,7 +57,7 @@ export default function StatusSearchPage() {
                                     value={requestId}
                                     onChange={(e) => setRequestId(e.target.value)}
                                     placeholder="Ej: 1234"
-                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white transition-all"
+                                    className="skeuo-input w-full pl-12 pr-4 py-4 rounded-xl text-slate-900 placeholder-slate-400 font-medium"
                                     required
                                 />
                             </div>
@@ -64,7 +66,7 @@ export default function StatusSearchPage() {
                         <button
                             type="submit"
                             disabled={!requestId}
-                            className="w-full bg-brand text-white font-bold py-4 rounded-xl hover:bg-brand/90 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 shadow-lg shadow-brand/20"
+                            className="skeuo-button w-full text-brand font-semibold py-4 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Ver Estado <ArrowRight className="w-5 h-5" />
                         </button>
@@ -73,7 +75,7 @@ export default function StatusSearchPage() {
 
                 <div className="mt-8 text-center">
                     <p className="text-xs text-slate-400">
-                        ¿No encontrás tu número? Revisá el mensaje de WhatsApp que te enviamos.
+                        No encontras tu numero? Revisa el mensaje de WhatsApp que te enviamos.
                     </p>
                 </div>
             </motion.div>
