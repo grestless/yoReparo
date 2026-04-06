@@ -1,205 +1,196 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Star, MessageCircle, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Star, ArrowRight, Shield, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { services } from "@/lib/services";
+
+const heroServices = [
+    {
+        id: "climatizacion",
+        name: "Climatizacion",
+        image: "/climatizacion.jpg",
+        href: "/servicios?category=Climatización",
+    },
+    {
+        id: "electrodomesticos",
+        name: "Electrodomesticos",
+        image: "/electrodomesticos.jpg",
+        href: "/servicios?category=Electrodomésticos",
+    },
+    {
+        id: "instalaciones",
+        name: "Instalaciones",
+        image: "/electricidad.jpg",
+        href: "/servicios?category=Instalaciones",
+    },
+    {
+        id: "automotor",
+        name: "Automotor",
+        image: "/automotor.jpg",
+        href: "/servicios?category=Automotor",
+    },
+];
 
 export function Hero() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [isFocused, setIsFocused] = useState(false);
-    const [suggestions, setSuggestions] = useState<typeof services>([]);
-    const searchRef = useRef<HTMLDivElement>(null);
-    const router = useRouter();
-
-    useEffect(() => {
-        if (searchQuery.trim().length > 1) {
-            const filtered = services.filter(s =>
-                s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                s.category.toLowerCase().includes(searchQuery.toLowerCase())
-            ).slice(0, 5);
-            setSuggestions(filtered);
-        } else {
-            setSuggestions([]);
-        }
-    }, [searchQuery]);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-                setIsFocused(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const handleSearch = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (searchQuery.trim()) {
-            router.push(`/servicios?q=${encodeURIComponent(searchQuery.trim())}`);
-        } else {
-            router.push('/servicios');
-        }
-    };
-
     return (
-        <section className="relative bg-brand text-brand-foreground py-20 lg:py-32 overflow-hidden min-h-[700px] flex items-center justify-center -mt-16 pt-32">
-            {/* Center Background Image behind text */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.12] mix-blend-luminosity pointer-events-none overflow-hidden scale-110">
-                <Image
-                    src="/hero-center.png"
-                    alt="Fondo reparación"
-                    fill
-                    className="object-cover object-center"
-                    priority
-                />
-            </div>
+        <section className="relative bg-brand text-brand-foreground min-h-[90vh] flex items-center -mt-16 pt-24 pb-16 overflow-hidden">
+            {/* Subtle texture overlay */}
+            <div 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                }}
+            />
 
-            {/* Decorative Elements */}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand/50 to-brand pointer-events-none z-1" />
-
-            <div className="container mx-auto px-4 text-center relative z-10 w-full max-w-5xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-wrap items-center justify-center gap-3 mb-10"
-                >
-                    <div className="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-                        <span className="text-xs font-bold tracking-[0.1em] text-white uppercase">#1 en Servicio Técnico Zonal</span>
-                    </div>
-                    <div className="flex gap-1 bg-white/10 p-1 rounded-lg border border-white/10">
-                        {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-3.5 h-3.5 fill-brand-accent text-brand-accent" />
-                        ))}
-                    </div>
-                    <div className="px-4 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/30 backdrop-blur-md">
-                        <span className="text-xs font-bold tracking-[0.1em] text-brand-accent uppercase">Garantía y Matrícula</span>
-                    </div>
-                </motion.div>
-
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95] text-white"
-                >
-                    Tu hogar y empresa <br />
-                    en manos <span className="text-brand-accent">expertas.</span>
-                </motion.h1>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-12 font-light leading-relaxed"
-                >
-                    Centralizamos todos los oficios técnicos en una sola plataforma. Con garantía oficial y técnicos matriculados.
-                </motion.p>
-
-                <div className="max-w-2xl mx-auto relative group" ref={searchRef}>
-                    <motion.form
-                        onSubmit={handleSearch}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className={`flex flex-col md:flex-row items-center bg-white p-1 border-4 transition-all duration-300 shadow-2xl ${isFocused ? 'border-brand-accent ring-8 ring-brand-accent/10 scale-[1.02]' : 'border-white/10 hover:border-white/20'} rounded-3xl md:rounded-full overflow-hidden`}
-                    >
-                        <div className="pl-6 pr-2 items-center justify-center hidden md:flex">
-                            <Search className={`w-6 h-6 transition-colors ${isFocused ? 'text-brand' : 'text-slate-400'}`} />
-                        </div>
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onFocus={() => setIsFocused(true)}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="¿Qué servicio estás buscando hoy?"
-                            className="flex-1 bg-transparent border-none outline-none text-slate-800 px-6 md:px-2 py-5 md:py-4 placeholder:text-slate-400 w-full text-lg font-medium text-center md:text-left"
-                        />
-                        <button type="submit" className="w-full md:w-auto bg-brand text-white hover:bg-brand/90 px-10 py-5 md:py-4 rounded-2xl md:rounded-full font-bold transition-all duration-300 text-lg shadow-lg active:scale-95">
-                            Buscar
-                        </button>
-                    </motion.form>
-
-                    {/* Suggestions Dropdown */}
-                    <AnimatePresence>
-                        {isFocused && (searchQuery.length > 0) && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 10 }}
-                                className="absolute top-full left-0 right-0 mt-4 bg-white rounded-[32px] overflow-hidden shadow-2xl z-50 border border-slate-100"
-                            >
-                                <div className="p-2">
-                                    {suggestions.length > 0 ? (
-                                        suggestions.map((s) => (
-                                            <button
-                                                key={s.id}
-                                                onClick={() => {
-                                                    router.push(`/servicios?q=${encodeURIComponent(s.title)}`);
-                                                    setIsFocused(false);
-                                                }}
-                                                className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors rounded-2xl group"
-                                            >
-                                                <div className="flex items-center gap-4">
-                                                    <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center`}>
-                                                        <s.icon className="w-5 h-5" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="font-bold text-slate-900 leading-tight">{s.title}</p>
-                                                        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">{s.category}</p>
-                                                    </div>
-                                                </div>
-                                                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-brand transition-transform group-hover:translate-x-1" />
-                                            </button>
-                                        ))
-                                    ) : (
-                                        <div className="px-6 py-8 text-center">
-                                            <p className="text-slate-400 font-medium">No encontramos ese servicio exacto...</p>
-                                        </div>
-                                    )}
-
-                                    {/* Contact Specialty Option */}
-                                    <div className="border-t border-slate-50 mt-2 p-2 focus-within:ring-0">
-                                        <Link
-                                            href="https://wa.me/5493816694147?text=Hola,%20busco%20un%20servicio%20que%20no%20encuentro:%20"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-full flex items-center gap-4 p-4 bg-brand/5 hover:bg-brand/10 transition-all rounded-2xl border-2 border-dashed border-brand/10 hover:border-brand/20 group"
-                                        >
-                                            <div className="w-12 h-12 bg-brand rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                                <MessageCircle className="w-6 h-6 text-brand-accent" />
-                                            </div>
-                                            <div className="text-left">
-                                                <p className="font-bold text-brand leading-tight">¿No lo encuentras?</p>
-                                                <p className="text-sm text-slate-600">Contactar un especialista directamente</p>
-                                            </div>
-                                            <div className="ml-auto w-8 h-8 rounded-full border border-brand/10 flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-all">
-                                                <ArrowRight className="w-4 h-4" />
-                                            </div>
-                                        </Link>
-                                    </div>
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+                    
+                    {/* Left Content - Text */}
+                    <div className="w-full lg:w-[38%] flex flex-col justify-center pt-4">
+                        {/* Badges */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-wrap gap-3 mb-8"
+                        >
+                            <div className="skeuo-dark-card px-4 py-2 rounded-full flex items-center gap-2">
+                                <div className="flex gap-0.5">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="w-3 h-3 fill-brand-accent text-brand-accent" />
+                                    ))}
                                 </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                                <span className="text-xs font-medium text-white/80">Servicio Verificado</span>
+                            </div>
+                            <div className="skeuo-dark-card px-4 py-2 rounded-full">
+                                <span className="text-xs font-medium text-brand-accent">Garantia Escrita</span>
+                            </div>
+                        </motion.div>
+
+                        {/* Title */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] text-balance"
+                        >
+                            Soluciones tecnicas para tu hogar{" "}
+                            <span className="text-brand-accent">y empresa.</span>
+                        </motion.h1>
+
+                        {/* Description */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="text-lg text-white/70 mb-8 leading-relaxed max-w-md"
+                        >
+                            Tecnicos matriculados. Presupuesto sin cargo. Atencion inmediata en San Miguel de Tucuman.
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className="flex flex-col sm:flex-row gap-4 mb-10"
+                        >
+                            <Link href="/servicios">
+                                <button className="skeuo-button text-brand font-semibold px-8 py-4 rounded-full flex items-center justify-center gap-2 w-full sm:w-auto transition-all">
+                                    Ver Servicios
+                                    <ArrowRight className="w-4 h-4" />
+                                </button>
+                            </Link>
+                            <Link href="https://wa.me/5493816694147?text=Hola,%20necesito%20un%20servicio%20técnico" target="_blank">
+                                <button className="bg-white/10 hover:bg-white/15 border border-white/20 text-white font-medium px-8 py-4 rounded-full flex items-center justify-center gap-2 w-full sm:w-auto transition-all backdrop-blur-sm">
+                                    Contactar Ahora
+                                </button>
+                            </Link>
+                        </motion.div>
+
+                        {/* Trust indicators */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                            className="flex flex-wrap gap-6 text-white/60 text-sm"
+                        >
+                            <div className="flex items-center gap-2">
+                                <Shield className="w-4 h-4 text-brand-accent" />
+                                <span>Tecnicos Matriculados</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-brand-accent" />
+                                <span>Respuesta en 24hs</span>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Content - Bento Grid of Services */}
+                    <div className="w-full lg:w-[62%]">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="flex gap-4 h-[500px] md:h-[550px]"
+                        >
+                            {/* Big Image - Climatizacion */}
+                            <Link 
+                                href={heroServices[0].href}
+                                className="relative w-[45%] h-full rounded-3xl overflow-hidden group cursor-pointer skeuo-image"
+                            >
+                                <Image
+                                    src={heroServices[0].image}
+                                    alt={heroServices[0].name}
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    priority
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                                <div className="absolute bottom-0 left-0 right-0 p-5">
+                                    <span className="skeuo-dark-card text-white text-sm font-medium px-4 py-2 rounded-full inline-flex items-center gap-2 backdrop-blur-sm">
+                                        {heroServices[0].name}
+                                        <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                    </span>
+                                </div>
+                            </Link>
+
+                            {/* Right Column - 3 Smaller Images */}
+                            <div className="flex flex-col gap-4 w-[55%]">
+                                {heroServices.slice(1).map((service, index) => (
+                                    <Link
+                                        key={service.id}
+                                        href={service.href}
+                                        className="relative flex-1 rounded-2xl overflow-hidden group cursor-pointer skeuo-image"
+                                    >
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                                            className="w-full h-full"
+                                        >
+                                            <Image
+                                                src={service.image}
+                                                alt={service.name}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                                            <div className="absolute bottom-0 left-0 right-0 p-4">
+                                                <span className="skeuo-dark-card text-white text-xs font-medium px-3 py-1.5 rounded-full inline-flex items-center gap-2 backdrop-blur-sm">
+                                                    {service.name}
+                                                    <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                                </span>
+                                            </div>
+                                        </motion.div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-12 flex justify-center items-center gap-8"
-                >
-
-
-                </motion.div>
             </div>
         </section>
     );
 }
-
