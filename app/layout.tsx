@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, DM_Sans } from "next/font/google";
-import "./globals.css";
+import "./globals.css"; // Adjust path based on your actual file structure
 import { Providers } from "@/components/Providers";
 import { Toaster } from "sonner";
 
@@ -57,10 +57,6 @@ export const metadata: Metadata = {
     title: "YoReparo - Servicios Técnicos Integrales",
     description: "Soluciones técnicas profesionales. Garantía y confianza.",
     images: ['/og-image.jpg'], // Consistent with OG
-  },
-  icons: {
-    icon: '/icon.png',
-    apple: '/apple-icon.png', // Next.js convention, good to be explicit
   },
 };
 
